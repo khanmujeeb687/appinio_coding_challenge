@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:appinio_coding_challenge/utils/screen_utils.dart';
+import 'package:appinio_coding_challenge/values/CustomColors.dart';
 import 'package:flutter/cupertino.dart';
 
 class CityInfoTab extends StatefulWidget {
@@ -23,7 +24,7 @@ class _CityInfoTabState extends State<CityInfoTab> {
           alignment: Alignment.center,
           decoration:  BoxDecoration(
             gradient: const LinearGradient(
-              colors: [Color(0xff00008B),Color(0xff432c85),Color(0xff432c85)],
+              colors: [CustomColors.blue,CustomColors.purple,CustomColors.purple],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter
             ),

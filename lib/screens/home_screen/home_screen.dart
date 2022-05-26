@@ -1,8 +1,7 @@
-import 'package:appinio_coding_challenge/tabs/cv_tab.dart';
+import 'package:appinio_coding_challenge/screens/home_screen/tabs/city_info_tab.dart';
+import 'package:appinio_coding_challenge/screens/home_screen/tabs/cv_tab.dart';
+import 'package:appinio_coding_challenge/values/CustomColors.dart';
 import 'package:flutter/cupertino.dart';
-
-import '../tabs/city_info_tab.dart';
-
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -12,11 +11,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int _currentTab = 0;
+
   @override
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
-        backgroundColor: CupertinoColors.black,
+        border:Border.all(color: _currentTab==0? CustomColors.black: CustomColors.white,width: 0),
+        onTap: onTabChange,
+        backgroundColor: _currentTab==0? CustomColors.black: CustomColors.white,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.cloud_moon_fill),
@@ -39,5 +42,11 @@ class _HomeScreenState extends State<HomeScreen> {
         }
       },
     );
+  }
+
+  void onTabChange(int value) {
+    setState(() {
+      _currentTab = value;
+    });
   }
 }

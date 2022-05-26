@@ -1,4 +1,5 @@
-import 'package:appinio_coding_challenge/screens/home_screen.dart';
+import 'package:appinio_coding_challenge/screens/home_screen/home_screen.dart';
+import 'package:appinio_coding_challenge/values/CustomColors.dart';
 import 'package:appinio_coding_challenge/values/constants/app_constants.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -15,8 +16,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: AppConstants.APP_NAME,
       theme: CupertinoThemeData(
-        scaffoldBackgroundColor: CupertinoColors.black,
-        primaryColor: Color(0xff432c85)
+        scaffoldBackgroundColor: CustomColors.black,
+        primaryColor: CustomColors.purple
       ),
       home: HomeScreen(),
     );

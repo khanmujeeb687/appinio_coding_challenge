@@ -42,34 +42,34 @@ class WeatherInfoCurrent {
   int? cloud;
   double? feelslikeC;
   double? feelslikeF;
-  int? visKm; //
+  int? visKm; 
   int? visMiles;
-  int? uv;  //
+  int? uv;  
   double? gustMph;
-  double? gustKph; //
+  double? gustKph; 
 
   WeatherInfoCurrent({
     this.lastUpdatedEpoch,
     this.lastUpdated,
     this.tempC,
     this.tempF,
-    this.isDay, //
+    this.isDay, 
     this.condition,
-    this.windMph, //
-    this.windKph, //
+    this.windMph, 
+    this.windKph, 
     this.windDegree,
-    this.windDir, //
-    this.pressureMb, //
+    this.windDir, 
+    this.pressureMb, 
     this.pressureIn,
     this.precipMm,
     this.precipIn,
-    this.humidity, //
-    this.cloud, //
+    this.humidity, 
+    this.cloud, 
     this.feelslikeC,
     this.feelslikeF,
-    this.visKm, //
+    this.visKm, 
     this.visMiles,
-    this.uv, //
+    this.uv, 
     this.gustMph,
     this.gustKph,
   });

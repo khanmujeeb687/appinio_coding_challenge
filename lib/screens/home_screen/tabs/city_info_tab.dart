@@ -22,7 +22,6 @@ class _CityInfoTabState extends State<CityInfoTab> {
   Widget build(BuildContext context) {
     double screenHeight = ScreenUtils.getHeight(context);
     double screenWidth = ScreenUtils.getWidth(context);
-    print(widget.weatherInfo?.current?.isDay.toString());
     return Container(
       height: screenHeight,
       width: screenWidth,

@@ -31,7 +31,7 @@ class _CVTabState extends State<CVTab> {
                   top: 0,
                   child: Container(
                     height: screenHeight / 3,
-                    color: CustomColors.black,
+                    color: CustomColors.purple,
                     width: screenWidth,
                   ),
                 ),

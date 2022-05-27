@@ -1,5 +1,7 @@
+import 'package:appinio_coding_challenge/models/weather_info.dart';
 import 'package:appinio_coding_challenge/screens/home_screen/tabs/city_info_tab.dart';
 import 'package:appinio_coding_challenge/screens/home_screen/tabs/cv_tab.dart';
+import 'package:appinio_coding_challenge/services/weather_service.dart';
 import 'package:appinio_coding_challenge/values/CustomColors.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -12,14 +14,22 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _currentTab = 0;
+  WeatherInfo? _weatherInfo;
+
+  @override
+  void initState() {
+    fetch();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
+      backgroundColor: CustomColors.white,
       tabBar: CupertinoTabBar(
-        border:Border.all(color: _currentTab==0? CustomColors.black: CustomColors.white,width: 0),
+        border:Border.all(color: CustomColors.white,width: 0),
         onTap: onTabChange,
-        backgroundColor: _currentTab==0? CustomColors.black: CustomColors.white,
+        backgroundColor: _currentTab==0? CustomColors.white: CustomColors.white,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.cloud_moon_fill),
@@ -34,11 +44,11 @@ class _HomeScreenState extends State<HomeScreen> {
       tabBuilder: (BuildContext context, int index) {
         switch(index){
           case 0:
-            return CityInfoTab();
+            return CityInfoTab(_weatherInfo);
           case 1:
-            return CVTab();
+            return const CVTab();
           default:
-            return SizedBox();
+            return const SizedBox();
         }
       },
     );
@@ -48,5 +58,10 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _currentTab = value;
     });
+  }
+
+  void fetch() async{
+      _weatherInfo = await WeatherService.getWeatherInfo();
+      setState(() {});
   }
 }

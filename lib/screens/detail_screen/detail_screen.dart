@@ -18,6 +18,15 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
+
+  bool loaded = false;
+
+  @override
+  void initState() {
+    setLoaded();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = ScreenUtils.getHeight(context);
@@ -124,31 +133,42 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
   Widget _item(String title,String lottieName){
     double screenWidth = ScreenUtils.getWidth(context);
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(25),
-      child: Container(
-        width: screenWidth-40,
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-            color: CustomColors.white.withOpacity(0.2),
-            borderRadius: BorderRadius.circular(25)
-        ),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaY: 5,sigmaX: 5),
-          child: Row(
-            children: [
-              Lottie.asset("assets/lottie/"+lottieName,height: 50,width: 50),
-              SizedBox(width: 15,),
-              Text(title,
-                style: const TextStyle(
-                    color: CustomColors.white,
-                  fontWeight: FontWeight.w300
+    return AnimatedContainer(
+      height: loaded?60:0,
+      duration: Duration(milliseconds: 400),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(25),
+        child: Container(
+          width: screenWidth-40,
+          padding: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+              color: CustomColors.white.withOpacity(0.2),
+              borderRadius: BorderRadius.circular(25)
+          ),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaY: 5,sigmaX: 5),
+            child: Row(
+              children: [
+                Lottie.asset("assets/lottie/"+lottieName,height: 50,width: 50),
+                SizedBox(width: 15,),
+                Text(title,
+                  style: const TextStyle(
+                      color: CustomColors.white,
+                    fontWeight: FontWeight.w300
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+
+  void setLoaded() async{
+    await Future.delayed(const Duration(milliseconds: 500));
+    setState(() {
+      loaded=true;
+    });
   }
 }

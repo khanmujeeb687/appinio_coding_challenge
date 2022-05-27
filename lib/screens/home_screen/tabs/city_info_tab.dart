@@ -22,49 +22,67 @@ class _CityInfoTabState extends State<CityInfoTab> {
   Widget build(BuildContext context) {
     double screenHeight = ScreenUtils.getHeight(context);
     double screenWidth = ScreenUtils.getWidth(context);
-    return Center(
-      child: GestureDetector(
-        onTap: onClick,
-        child: Hero(
-          tag: "city",
-          child: ClipRRect(
-            child: Container(
-              clipBehavior: Clip.hardEdge,
-              height: screenHeight*.6,
-              width: screenWidth*.8,
-              alignment: Alignment.center,
-              decoration:  BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [CustomColors.blue,CustomColors.purple,CustomColors.purple],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter
-                ),
-                borderRadius: BorderRadius.circular(20)
+    print(widget.weatherInfo?.current?.isDay.toString());
+    return Container(
+      height: screenHeight,
+      width: screenWidth,
+      child: Stack(
+        children: [
+          Container(
+            alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(40)
               ),
-              child: Column(
-                children: [
-                  const SizedBox(height: 80,),
-                  if(widget.weatherInfo!=null)
-                    Image.network(ApiConstants.HTTP+(widget.weatherInfo?.current?.condition?.icon ?? ""),height: screenWidth/4,width: screenWidth/4,),
-                  const SizedBox(height: 50,),
-                  Text("${widget.weatherInfo?.current?.tempC  ?? "--"} \u2103",style: const TextStyle(
-                      fontFeatures: [
-                        FontFeature.subscripts(),
+              clipBehavior: Clip.hardEdge,
+              child: Image.asset("assets/images/${(widget.weatherInfo?.current?.isDay == 1)? "day": 'night'}.jpeg",fit: BoxFit.cover,)),
+          Positioned(
+            top: screenHeight/4,
+            left: screenWidth*.1,
+            child: GestureDetector(
+              onTap: onClick,
+              child: Hero(
+                tag: "city",
+                child: ClipRRect(
+                  child: Container(
+                    clipBehavior: Clip.hardEdge,
+                    height: screenHeight*.6,
+                    width: screenWidth*.8,
+                    alignment: Alignment.center,
+                    decoration:  BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [CustomColors.blue.withOpacity(0.3),CustomColors.purple.withOpacity(0.3),CustomColors.purple.withOpacity(0.3)],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter
+                      ),
+                      borderRadius: BorderRadius.circular(20)
+                    ),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 80,),
+                        if(widget.weatherInfo!=null)
+                          Image.network(ApiConstants.HTTP+(widget.weatherInfo?.current?.condition?.icon ?? ""),height: screenWidth/4,width: screenWidth/4,),
+                        const SizedBox(height: 50,),
+                        Text("${widget.weatherInfo?.current?.tempC  ?? "--"} \u2103",style: const TextStyle(
+                            fontFeatures: [
+                              FontFeature.subscripts(),
+                            ],
+                          color: CupertinoColors.white,
+                          fontWeight: FontWeight.w300,
+                          fontSize: 50
+                        ),),
+                        const SizedBox(height: 30,),
+                        Text(widget.weatherInfo==null?"":(widget.weatherInfo?.location?.region?.toUpperCase() ?? ""),style: const TextStyle(
+                            color: CupertinoColors.white,
+                            fontSize: 20
+                        ),),
                       ],
-                    color: CupertinoColors.white,
-                    fontWeight: FontWeight.w300,
-                    fontSize: 50
-                  ),),
-                  const SizedBox(height: 30,),
-                  Text(widget.weatherInfo==null?"":(widget.weatherInfo?.location?.region?.toUpperCase() ?? ""),style: const TextStyle(
-                      color: CupertinoColors.white,
-                      fontSize: 20
-                  ),),
-                ],
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

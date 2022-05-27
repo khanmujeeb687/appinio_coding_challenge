@@ -2,7 +2,6 @@ import 'package:appinio_coding_challenge/models/weather_info.dart';
 import 'package:appinio_coding_challenge/screens/home_screen/tabs/city_info_tab.dart';
 import 'package:appinio_coding_challenge/screens/home_screen/tabs/cv_tab.dart';
 import 'package:appinio_coding_challenge/services/weather_service.dart';
-import 'package:appinio_coding_challenge/utils/location_util.dart';
 import 'package:appinio_coding_challenge/values/CustomColors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:location/location.dart';

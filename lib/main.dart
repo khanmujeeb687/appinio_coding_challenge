@@ -16,7 +16,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: AppConstants.APP_NAME,
       theme: CupertinoThemeData(
-        scaffoldBackgroundColor: CustomColors.black,
         primaryColor: CustomColors.purple
       ),
       home: HomeScreen(),

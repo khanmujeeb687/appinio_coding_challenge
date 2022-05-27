@@ -72,11 +72,31 @@ class _CityInfoTabState extends State<CityInfoTab> {
                             fontWeight: FontWeight.w300,
                             fontSize: 50
                           ),),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Container(
+                              padding: EdgeInsets.fromLTRB(10, 3, 10, 3),
+                              decoration: BoxDecoration(
+                                  color: CustomColors.white.withOpacity(0.2),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Text(
+                                "Feels like ${widget.weatherInfo?.current?.feelslikeC} \u2103",
+                                style: const TextStyle(
+                                    fontFeatures: [
+                                      FontFeature.subscripts(),
+                                    ],
+                                    color: CupertinoColors.white,
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 15),
+                              ),
+                            ),
+                          ),
                           const SizedBox(height: 30,),
                           Text(widget.weatherInfo==null?"":(widget.weatherInfo?.location?.region?.toUpperCase() ?? ""),style: const TextStyle(
                               color: CupertinoColors.white,
                               fontSize: 20
                           ),),
+
                         ],
                       ),
                     ),

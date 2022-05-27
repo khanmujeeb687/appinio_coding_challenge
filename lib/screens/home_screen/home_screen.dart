@@ -2,8 +2,11 @@ import 'package:appinio_coding_challenge/models/weather_info.dart';
 import 'package:appinio_coding_challenge/screens/home_screen/tabs/city_info_tab.dart';
 import 'package:appinio_coding_challenge/screens/home_screen/tabs/cv_tab.dart';
 import 'package:appinio_coding_challenge/services/weather_service.dart';
+import 'package:appinio_coding_challenge/utils/location_util.dart';
 import 'package:appinio_coding_challenge/values/CustomColors.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:location/location.dart';
+import 'package:toast/toast.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -27,9 +30,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return CupertinoTabScaffold(
       backgroundColor: CustomColors.white,
       tabBar: CupertinoTabBar(
-        border:Border.all(color: CustomColors.white,width: 0),
+        border: Border.all(color: CustomColors.white, width: 0),
         onTap: onTabChange,
-        backgroundColor: _currentTab==0? CustomColors.white: CustomColors.white,
+        backgroundColor:
+            _currentTab == 0 ? CustomColors.white : CustomColors.white,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.cloud_moon_fill),
@@ -42,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       tabBuilder: (BuildContext context, int index) {
-        switch(index){
+        switch (index) {
           case 0:
             return CityInfoTab(_weatherInfo);
           case 1:
@@ -60,8 +64,12 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void fetch() async{
-      _weatherInfo = await WeatherService.getWeatherInfo();
-      setState(() {});
+  void fetch() async {
+    LocationData? _locationData = await LocationUtil.getLocation();
+    if(_locationData==null){
+      Toast.show("Please provide location permission to continue!", duration: Toast.lengthShort, gravity:  Toast.bottom);
+    }
+    _weatherInfo = await WeatherService.getWeatherInfo(_locationData!);
+    setState(() {});
   }
 }

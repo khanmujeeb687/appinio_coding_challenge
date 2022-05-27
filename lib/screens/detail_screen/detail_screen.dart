@@ -4,7 +4,6 @@ import 'package:appinio_coding_challenge/models/weather_info.dart';
 import 'package:appinio_coding_challenge/values/constants/api_constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 
 import '../../utils/screen_utils.dart';
 import '../../values/CustomColors.dart';
@@ -113,13 +112,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       ),
                     ),
                     SizedBox(height: 50,),
-                    _item("Humidity ${widget.weatherInfo.current?.humidity}%", "humid.json",),
+                    _item("Humidity ${widget.weatherInfo.current?.humidity}%", CupertinoIcons.cloud_rain,),
                     SizedBox(height: 20,),
-                    _item("UV ${widget.weatherInfo.current?.uv}", "uv.json"),
+                    _item("UV ${widget.weatherInfo.current?.uv}", CupertinoIcons.waveform_path_ecg),
                     SizedBox(height: 20,),
-                    _item("Vision ${widget.weatherInfo.current?.visKm} Km", "vis.json"),
+                    _item("Vision ${widget.weatherInfo.current?.visKm} Km", CupertinoIcons.eye_solid),
                     SizedBox(height: 20,),
-                    _item("Wind Speed ${widget.weatherInfo.current?.windKph} Kph towards ${widget.weatherInfo.current?.windDir}", "wind.json"),
+                    _item("Wind Speed ${widget.weatherInfo.current?.windKph} Kph towards ${widget.weatherInfo.current?.windDir}", CupertinoIcons.wind),
                     SizedBox(height: 30,)
                   ],
                 ),
@@ -131,7 +130,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     );
   }
 
-  Widget _item(String title,String lottieName){
+  Widget _item(String title,IconData icon){
     double screenWidth = ScreenUtils.getWidth(context);
     return AnimatedContainer(
       height: loaded?60:0,
@@ -149,7 +148,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             filter: ImageFilter.blur(sigmaY: 5,sigmaX: 5),
             child: Row(
               children: [
-                Lottie.asset("assets/lottie/"+lottieName,height: 50,width: 50),
+                Icon(icon),
                 SizedBox(width: 15,),
                 Text(title,
                   style: const TextStyle(

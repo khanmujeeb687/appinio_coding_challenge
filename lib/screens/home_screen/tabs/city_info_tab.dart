@@ -28,12 +28,13 @@ class _CityInfoTabState extends State<CityInfoTab> {
       child: Stack(
         children: [
           Container(
-            alignment: Alignment.center,
+              width: screenWidth,height: screenHeight*.9,
+            alignment: Alignment.topCenter,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(40)
               ),
               clipBehavior: Clip.hardEdge,
-              child: Image.asset("assets/images/${(widget.weatherInfo?.current?.isDay == 1)? "day": 'night'}.jpeg",fit: BoxFit.cover,)),
+              child: Image.asset("assets/images/${(widget.weatherInfo?.current?.isDay == 1)? "day": 'night'}.jpeg",fit: BoxFit.cover,width: screenWidth,height: screenHeight*.9,)),
           Positioned(
             top: screenHeight/4,
             left: screenWidth*.1,
@@ -55,26 +56,29 @@ class _CityInfoTabState extends State<CityInfoTab> {
                       ),
                       borderRadius: BorderRadius.circular(20)
                     ),
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 80,),
-                        if(widget.weatherInfo!=null)
-                          Image.network(ApiConstants.HTTP+(widget.weatherInfo?.current?.condition?.icon ?? ""),height: screenWidth/4,width: screenWidth/4,),
-                        const SizedBox(height: 50,),
-                        Text("${widget.weatherInfo?.current?.tempC  ?? "--"} \u2103",style: const TextStyle(
-                            fontFeatures: [
-                              FontFeature.subscripts(),
-                            ],
-                          color: CupertinoColors.white,
-                          fontWeight: FontWeight.w300,
-                          fontSize: 50
-                        ),),
-                        const SizedBox(height: 30,),
-                        Text(widget.weatherInfo==null?"":(widget.weatherInfo?.location?.region?.toUpperCase() ?? ""),style: const TextStyle(
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 5,sigmaY: 5),
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 80,),
+                          if(widget.weatherInfo!=null)
+                            Image.network(ApiConstants.HTTP+(widget.weatherInfo?.current?.condition?.icon ?? ""),height: screenWidth/4,width: screenWidth/4,),
+                          const SizedBox(height: 50,),
+                          Text("${widget.weatherInfo?.current?.tempC  ?? "--"} \u2103",style: const TextStyle(
+                              fontFeatures: [
+                                FontFeature.subscripts(),
+                              ],
                             color: CupertinoColors.white,
-                            fontSize: 20
-                        ),),
-                      ],
+                            fontWeight: FontWeight.w300,
+                            fontSize: 50
+                          ),),
+                          const SizedBox(height: 30,),
+                          Text(widget.weatherInfo==null?"":(widget.weatherInfo?.location?.region?.toUpperCase() ?? ""),style: const TextStyle(
+                              color: CupertinoColors.white,
+                              fontSize: 20
+                          ),),
+                        ],
+                      ),
                     ),
                   ),
                 ),

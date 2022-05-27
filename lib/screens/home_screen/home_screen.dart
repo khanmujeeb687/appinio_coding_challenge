@@ -6,7 +6,6 @@ import 'package:appinio_coding_challenge/utils/location_util.dart';
 import 'package:appinio_coding_challenge/values/CustomColors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:location/location.dart';
-import 'package:toast/toast.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -65,11 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void fetch() async {
-    LocationData? _locationData = await LocationUtil.getLocation();
-    if(_locationData==null){
-      Toast.show("Please provide location permission to continue!", duration: Toast.lengthShort, gravity:  Toast.bottom);
-    }
-    _weatherInfo = await WeatherService.getWeatherInfo(_locationData!);
+    _weatherInfo = await WeatherService.getWeatherInfo();
     setState(() {});
   }
 }
